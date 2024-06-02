@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct0nja1st1e30"]
+
+[ext_resource type="Script" path="res://scripts/base_screen.gd" id="1_8wgq7"]
+[ext_resource type="Theme" uid="uid://b2yw3qprwvxry" path="res://assets/theme/base_theme.tres" id="1_k5tr2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egto6"]
+bg_color = Color(0.484762, 0.632256, 0.64301, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.627428, 0.840306, 0.908136, 1)
+
+[sub_resource type="Theme" id="Theme_ed14x"]
+Panel/styles/panel = SubResource("StyleBoxFlat_egto6")
+
+[node name="OptionsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_k5tr2")
+script = ExtResource("1_8wgq7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ed14x")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 117.0
+offset_right = 304.0
+offset_bottom = 257.0
+
+[node name="TabBar" type="TabBar" parent="."]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 317.0
+offset_right = 528.0
+offset_bottom = 357.0
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_right = 699.0
+offset_bottom = 538.0
+
+[node name="Tree" type="Tree" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -200.0
+offset_right = 384.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+select_mode = 1
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -200.0
+offset_right = -167.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+allow_search = false
+
+[connection signal="item_edited" from="Tree" to="." method="_on_tree_item_edited"]

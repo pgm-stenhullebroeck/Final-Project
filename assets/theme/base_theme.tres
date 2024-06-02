@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://b2yw3qprwvxry"]
+
+[ext_resource type="FontFile" uid="uid://dvf1cqvalttt0" path="res://assets/theme/VCR_OSD_MONO_1.001.ttf" id="1_dhapi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_naw54"]
+bg_color = Color(0.304593, 0.802841, 0.763069, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.318411, 0.27977, 0.146294, 1)
+
+[resource]
+default_font = ExtResource("1_dhapi")
+default_font_size = 24
+Panel/styles/panel = SubResource("StyleBoxFlat_naw54")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdi6qjdn67ckg"]
+
+[ext_resource type="PackedScene" uid="uid://ds60st4k2d2r4" path="res://scenes/game.tscn" id="1_0isud"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_guc3f"]
+[ext_resource type="PackedScene" uid="uid://d3b3bxpjh8mcq" path="res://scenes/screens.tscn" id="2_yoem1"]
+[ext_resource type="PackedScene" uid="uid://dwl2e52mo8jx5" path="res://scenes/game_camera.tscn" id="4_47368"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_guc3f")
+
+[node name="Game" parent="." instance=ExtResource("1_0isud")]
+
+[node name="Screens" parent="." instance=ExtResource("2_yoem1")]
+
+[node name="GameCamera" parent="." instance=ExtResource("4_47368")]
