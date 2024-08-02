@@ -1,5 +1,7 @@
 extends Node
 
+var exercises = []
+
 func add_log_msg(log_str: String):
 	var console = get_tree().get_first_node_in_group("debug_console")
 	if console:
@@ -8,3 +10,10 @@ func add_log_msg(log_str: String):
 			if !log_label.text.is_empty():
 				log_label.text += "\n"
 			log_label.text += log_str
+
+func get_random_numbers(from, to):
+	var arr = []
+	for i in range(from, to):
+		arr.append(i)
+	arr.shuffle()
+	return arr

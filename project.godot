@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SoundFX="*res://scripts/sound_fx.gd"
 MyUtility="*res://scripts/utility.gd"
+StaticData="*res://assets/data/static_data.gd"
 
 [display]
 
@@ -26,6 +27,10 @@ window/size/viewport_width=960
 window/size/viewport_height=540
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/save_system/plugin.cfg")
 
 [input]
 

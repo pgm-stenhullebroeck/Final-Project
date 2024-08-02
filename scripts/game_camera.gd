@@ -10,11 +10,11 @@ func _ready():
 	limit_left = 0
 	limit_right = viewport_size.x
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func setup_camera():
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	pass

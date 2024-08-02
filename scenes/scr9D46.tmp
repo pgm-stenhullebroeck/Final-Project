@@ -3,16 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://bnd8co0vtghfx" path="res://scenes/title_screen.tscn" id="1_p242b"]
 [ext_resource type="Script" path="res://scripts/screens.gd" id="1_thcoc"]
 [ext_resource type="PackedScene" uid="uid://ct0nja1st1e30" path="res://scenes/options_screen.tscn" id="3_wsdub"]
-[ext_resource type="PackedScene" uid="uid://yt1hxpqdgmva" path="res://scenes/exercise_screen.tscn" id="4_dig4b"]
+[ext_resource type="PackedScene" uid="uid://yt1hxpqdgmva" path="res://scenes/exercise_screen.tscn" id="4_1fqr5"]
 
 [node name="Screens" type="CanvasLayer"]
 script = ExtResource("1_thcoc")
 
 [node name="TitleScreen" parent="." instance=ExtResource("1_p242b")]
-visible = false
 
 [node name="OptionsScreen" parent="." instance=ExtResource("3_wsdub")]
-visible = false
 
-[node name="ExerciseScreen" parent="." instance=ExtResource("4_dig4b")]
-visible = false
+[node name="ExerciseScreen" parent="." instance=ExtResource("4_1fqr5")]

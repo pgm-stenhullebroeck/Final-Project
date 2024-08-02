@@ -1,0 +1,204 @@
+[gd_scene load_steps=13 format=3 uid="uid://yt1hxpqdgmva"]
+
+[ext_resource type="Texture2D" uid="uid://5jouq5o4dtgf" path="res://assets/textures/bg/panel_beigeLight.png" id="2_xyu52"]
+[ext_resource type="LabelSettings" uid="uid://cg1k487gxrf13" path="res://assets/theme/large_label.tres" id="3_ehal2"]
+[ext_resource type="Script" path="res://scripts/exercise.gd" id="3_fptwj"]
+[ext_resource type="Texture2D" uid="uid://c8rt2t6d7crxh" path="res://assets/textures/ui/buttonLong_beige.png" id="4_e5ot4"]
+[ext_resource type="Texture2D" uid="uid://daclt3rbhs7l4" path="res://assets/textures/ui/buttonLong_beige_pressed.png" id="5_qkr3g"]
+[ext_resource type="Script" path="res://scripts/animation_player.gd" id="6_8xwlg"]
+[ext_resource type="PackedScene" uid="uid://bv557pno68fqy" path="res://scenes/screen_button.tscn" id="7_pqyxl"]
+
+[sub_resource type="Theme" id="Theme_5ykxn"]
+default_font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_u2nj7"]
+font_size = 24
+font_color = Color(0.144063, 0.144063, 0.144063, 1)
+
+[sub_resource type="Animation" id="Animation_cv3fa"]
+resource_name = "press"
+length = 0.001
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CheckBtn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(516, 0), Vector2(516, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_kebyu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CheckBtn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(516, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nevhp"]
+_data = {
+"RESET": SubResource("Animation_kebyu"),
+"press": SubResource("Animation_cv3fa")
+}
+
+[node name="ExerciseScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_fptwj")
+
+[node name="BGColor" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xyu52")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -132.0
+offset_right = -100.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExerciseContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/ExerciseContainer"]
+layout_mode = 2
+theme_override_constants/separation = 55
+alignment = 1
+
+[node name="FirstNr" type="Label" parent="NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "888"
+label_settings = ExtResource("3_ehal2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Operator" type="Label" parent="NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
+label_settings = ExtResource("3_ehal2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SecondNr" type="Label" parent="NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "888"
+label_settings = ExtResource("3_ehal2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Equals" type="Label" parent="NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "="
+label_settings = ExtResource("3_ehal2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputBox" type="VBoxContainer" parent="NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AnswerInput" type="LineEdit" parent="NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer/InputBox"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme = SubResource("Theme_5ykxn")
+placeholder_text = "?"
+alignment = 1
+max_length = 4
+virtual_keyboard_type = 2
+
+[node name="Control" type="Control" parent="NinePatchRect/MarginContainer/ExerciseContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="CheckBtn" type="TextureButton" parent="NinePatchRect/MarginContainer/ExerciseContainer/Control"]
+layout_mode = 0
+offset_left = 516.0
+offset_right = 760.0
+offset_bottom = 62.0
+texture_normal = ExtResource("4_e5ot4")
+texture_pressed = ExtResource("5_qkr3g")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/ExerciseContainer/Control/CheckBtn"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -21.0
+offset_right = 17.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "OK"
+label_settings = SubResource("LabelSettings_u2nj7")
+
+[node name="SubmitBtn" type="Button" parent="NinePatchRect/MarginContainer/ExerciseContainer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Volgende"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NinePatchRect/MarginContainer/ExerciseContainer/Control"]
+libraries = {
+"": SubResource("AnimationLibrary_nevhp")
+}
+script = ExtResource("6_8xwlg")
+
+[node name="BackToOptions" parent="." instance=ExtResource("7_pqyxl")]
+layout_mode = 0
+
+[connection signal="button_down" from="NinePatchRect/MarginContainer/ExerciseContainer/Control/CheckBtn" to="NinePatchRect/MarginContainer/ExerciseContainer/Control/AnimationPlayer" method="_on_check_btn_button_down"]
+[connection signal="button_up" from="NinePatchRect/MarginContainer/ExerciseContainer/Control/CheckBtn" to="NinePatchRect/MarginContainer/ExerciseContainer/Control/AnimationPlayer" method="_on_check_btn_button_up"]
+[connection signal="pressed" from="NinePatchRect/MarginContainer/ExerciseContainer/Control/CheckBtn" to="." method="_on_check_btn_pressed"]
