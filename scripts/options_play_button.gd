@@ -4,6 +4,7 @@ extends ScreenButton
 @onready var v_box_container = $"../TypeSelect/ScrollContainer/VBoxContainer"
 @onready var exercises = $"../Exercises"
 @onready var h_slider_amount = $"../Sliders/HSliderAmount"
+@onready var h_slider_interval = $"../Sliders/HSliderInterval"
 
 var save_file_path = "user://exercise_list.save"
 var exercise_list = []
@@ -15,33 +16,34 @@ func _on_pressed():
 	var checks = v_box_container.get_children()
 	var types = []
 	var amount = h_slider_amount.value
-
+	
 	for check in checks:
 		if check.button_pressed:
 			types.append(check.get_index())
-
-	for type in types:
-		var item_exercises = items[type]["exercises"]
-		var indexes = MyUtility.get_random_numbers(0, item_exercises.size()).slice(0, amount)
-		for index in indexes:
-			var item_exercise = item_exercises[index]
-			exercise_list.append(item_exercise)
-			exercises.add_item(str(type) + ": " +
-				str(item_exercise["first"]) 
-				+ " " + 
-				str(item_exercise["operator"]) 
-				+ " " + 
-				str(item_exercise["second"])
-				)
-	
-	save_exercise_list()
-	exercise_list = []
-	clicked.emit(self)
+	if !types.is_empty():
+		for type in types:
+			var item_exercises = items[type]["exercises"]
+			var indexes = MyUtility.get_random_numbers(0, item_exercises.size()).slice(0, amount)
+			for index in indexes:
+				var item_exercise = item_exercises[index]
+				exercise_list.append(item_exercise)
+				exercises.add_item(str(type) + ": " +
+					str(item_exercise["first"]) 
+					+ " " + 
+					str(item_exercise["operator"]) 
+					+ " " + 
+					str(item_exercise["second"])
+					)
+		
+		save_exercise_list()
+		exercise_list = []
+		clicked.emit(self)
 
 
 func save_exercise_list():
 	var file = FileAccess.open(save_file_path, FileAccess.WRITE)
 	file.store_var(exercise_list)
+	file.store_var(h_slider_interval.value)
 	print("saving list to disk...")
 	file.close()
 

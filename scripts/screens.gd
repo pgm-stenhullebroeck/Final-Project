@@ -31,6 +31,8 @@ func _on_button_pressed(button):
 		"BackToOptions":
 			await get_tree().create_timer(0.25).timeout
 			change_screen(options_screen)
+			options_screen.clear()
+			exercise_screen.clear()
 
 func change_screen(new_screen):
 	if current_screen:

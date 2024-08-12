@@ -4,17 +4,19 @@ extends BaseScreen
 @onready var operator = $NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer/Operator
 @onready var second_nr = $NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer/SecondNr
 @onready var answer_input = $NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer/InputBox/AnswerInput
-@onready var check_btn = $NinePatchRect/MarginContainer/ExerciseContainer/Control/CheckBtn
-@onready var submit_btn = $NinePatchRect/MarginContainer/ExerciseContainer/Control/SubmitBtn
+@onready var check_btn = $NinePatchRect/MarginContainer/ExerciseContainer/CheckBtnBox/CheckBtn 
+@onready var result_modal = $ResultModal
+@onready var result_label = $ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/ResultLabel
+@onready var numpad_container = $NinePatchRect/NumpadContainer
 
-var save_file_path = "user://exercise_list.save"
-var exercise_list = []
-var current_exercise = 0
-var correct_answers = 0
-var answer_list = []
+const TIC_TAC_TOE = preload("res://scenes/tic_tac_toe.tscn")
 
-func _ready():
-	pass
+const save_file_path: String = "user://exercise_list.save"
+var exercise_list: Array = []
+var current_exercise:int = 0
+var correct_answers: int = 0
+var answer_list: Array = []
+var interval: int = 0
 
 func start_exercises():
 	load_exercise_list()
@@ -26,6 +28,7 @@ func load_exercise_list():
 	if FileAccess.file_exists(save_file_path):
 		var file = FileAccess.open(save_file_path, FileAccess.READ)
 		exercise_list = file.get_var()
+		interval = file.get_var()
 		file.close()
 
 func set_exercise():
@@ -34,9 +37,10 @@ func set_exercise():
 		operator.text = str(exercise_list[current_exercise]["operator"])
 		second_nr.text = str(exercise_list[current_exercise]["second"])
 	else:
-		submit_btn.visible = true
+		#submit_btn.visible = true
+		result_modal.visible = true
+		result_label.text = str("Eindscore: ", correct_answers, "/", exercise_list.size())
 		print('finished')
-		print("Eindscore: ", correct_answers, "/", exercise_list.size())
 
 func _on_check_btn_pressed():
 	var input_answer: int
@@ -49,7 +53,7 @@ func _on_check_btn_pressed():
 		else: 
 			answer = exercise_list[current_exercise]["first"] - exercise_list[current_exercise]["second"]
 		
-		if int(answer_input.text) == answer:
+		if input_answer == answer:
 			print('succes')
 			correct_answers += 1
 		else:
@@ -58,5 +62,29 @@ func _on_check_btn_pressed():
 		current_exercise += 1
 		answer_input.text = ''
 		set_exercise()
+		if current_exercise % interval == 0:
+			start_game(TIC_TAC_TOE)
+			#var game = TIC_TAC_TOE.instantiate()
+			#self.add_child(game)
+			#game.reset_game.connect(_reset_game)
+			#game.continue_exercise.connect(_increase_interval)
 	else:
 		print('no input')
+
+func _on_answer_input_text_submitted(_new_text):
+	check_btn.pressed.emit()
+
+func start_game(game_scene):
+	var game = game_scene.instantiate()
+	self.add_child(game)
+	game.reset_game.connect(_reset_game)
+
+func _reset_game(game, game_scene):
+	game.queue_free()
+	start_game(game_scene)
+
+func clear():
+	result_modal.visible = false
+	current_exercise = 0
+	correct_answers = 0
+	answer_list = []

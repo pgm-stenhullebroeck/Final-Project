@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://ct0nja1st1e30"]
+[gd_scene load_steps=11 format=3 uid="uid://ct0nja1st1e30"]
 
-[ext_resource type="Script" path="res://scripts/base_screen.gd" id="1_8wgq7"]
 [ext_resource type="Theme" uid="uid://b2yw3qprwvxry" path="res://assets/theme/base_theme.tres" id="1_k5tr2"]
+[ext_resource type="Script" path="res://scripts/options_screen.gd" id="2_c2oa8"]
 [ext_resource type="Texture2D" uid="uid://cvrqlg8cplxxn" path="res://assets/textures/bg/Border All 4.png" id="3_7cmqi"]
 [ext_resource type="Script" path="res://scripts/type_select.gd" id="4_sabhx"]
 [ext_resource type="Script" path="res://scripts/amount_value.gd" id="5_qtfqs"]
+[ext_resource type="Script" path="res://scripts/interval_value.gd" id="6_pybdy"]
 [ext_resource type="Script" path="res://scripts/options_play_button.gd" id="7_0hkdj"]
 [ext_resource type="PackedScene" uid="uid://bv557pno68fqy" path="res://scenes/screen_button.tscn" id="7_f5ueo"]
 
@@ -27,7 +28,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_k5tr2")
-script = ExtResource("1_8wgq7")
+script = ExtResource("2_c2oa8")
 
 [node name="BGColor" type="ColorRect" parent="."]
 layout_mode = 1
@@ -117,26 +118,47 @@ position = Vector2(103, 287)
 
 [node name="LabelAmount" type="Label" parent="Sliders"]
 offset_left = 1.0
-offset_top = 98.0
+offset_top = 35.0
 offset_right = 166.0
-offset_bottom = 121.0
-text = "Hoeveelheid per type"
+offset_bottom = 58.0
+text = "Oefeningen per type"
 
 [node name="HSliderAmount" type="HSlider" parent="Sliders"]
 offset_left = -11.0
-offset_top = 124.0
+offset_top = 61.0
 offset_right = 181.0
-offset_bottom = 151.0
+offset_bottom = 88.0
 min_value = 1.0
 max_value = 10.0
-value = 1.0
+value = 5.0
 
 [node name="AmountValue" type="Label" parent="Sliders"]
 offset_left = -6.0
-offset_top = 155.0
+offset_top = 92.0
 offset_right = 34.0
-offset_bottom = 178.0
+offset_bottom = 115.0
 script = ExtResource("5_qtfqs")
+
+[node name="LabelInterval" type="Label" parent="Sliders"]
+offset_top = 120.0
+offset_right = 156.0
+offset_bottom = 143.0
+text = "Oefeningen per spel"
+
+[node name="HSliderInterval" type="HSlider" parent="Sliders"]
+offset_left = -11.0
+offset_top = 155.0
+offset_right = 181.0
+offset_bottom = 182.0
+min_value = 1.0
+max_value = 20.0
+value = 5.0
+
+[node name="IntervalValue" type="Label" parent="Sliders"]
+offset_top = 184.0
+offset_right = 40.0
+offset_bottom = 207.0
+script = ExtResource("6_pybdy")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -164,3 +186,4 @@ text = "start
 "
 
 [connection signal="value_changed" from="Sliders/HSliderAmount" to="Sliders/AmountValue" method="_on_h_slider_amount_value_changed"]
+[connection signal="value_changed" from="Sliders/HSliderInterval" to="Sliders/IntervalValue" method="_on_h_slider_interval_value_changed"]

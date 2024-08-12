@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://6x1u0hxn1iwa"]
+
+[ext_resource type="Texture2D" uid="uid://cfhuoiff0iqd2" path="res://assets/textures/ui/buttonSquare_blue_pressed.png" id="1_d2f4f"]
+[ext_resource type="Script" path="res://scripts/slot.gd" id="2_is0sb"]
+
+[node name="Slot" type="TextureButton"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_d2f4f")
+stretch_mode = 0
+script = ExtResource("2_is0sb")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
