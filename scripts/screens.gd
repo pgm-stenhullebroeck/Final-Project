@@ -7,8 +7,6 @@ extends CanvasLayer
 var current_screen = null
 
 func _ready():
-	#console.visible = false
-	
 	register_buttons()
 	change_screen(title_screen)
 
@@ -22,7 +20,7 @@ func register_buttons():
 func _on_button_pressed(button):
 	match button.name:
 		"TitlePlay":
-			await get_tree().create_timer(0.25).timeout
+			await get_tree().create_timer(0.6).timeout
 			change_screen(options_screen)
 		"OptionsPlay":
 			await get_tree().create_timer(0.25).timeout
@@ -32,6 +30,13 @@ func _on_button_pressed(button):
 			await get_tree().create_timer(0.25).timeout
 			change_screen(options_screen)
 			options_screen.clear()
+			await get_tree().create_timer(0.25).timeout
+			exercise_screen.clear()
+		"Return":
+			await get_tree().create_timer(0.25).timeout
+			change_screen(options_screen)
+			options_screen.clear()
+			await get_tree().create_timer(0.25).timeout
 			exercise_screen.clear()
 
 func change_screen(new_screen):
@@ -44,6 +49,3 @@ func change_screen(new_screen):
 		var appear_tween = current_screen.appear()
 		await(appear_tween.finished)
 		get_tree().call_group("buttons", "set_disabled", false)
-
-func transfer_data_between_scenes(old_scene, new_scene):
-	new_scene.exercise_list = old_scene.exercise_list

@@ -1,10 +1,10 @@
 extends ScreenButton
 
 @onready var items = StaticData.itemData["data"]
-@onready var v_box_container = $"../TypeSelect/ScrollContainer/VBoxContainer"
-@onready var exercises = $"../Exercises"
+@onready var v_box_container = $"../ScrollContainer/VBoxContainer"
 @onready var h_slider_amount = $"../Sliders/HSliderAmount"
 @onready var h_slider_interval = $"../Sliders/HSliderInterval"
+@onready var h_slider_game = $"../Sliders/HSliderGame"
 
 var save_file_path = "user://exercise_list.save"
 var exercise_list = []
@@ -27,14 +27,8 @@ func _on_pressed():
 			for index in indexes:
 				var item_exercise = item_exercises[index]
 				exercise_list.append(item_exercise)
-				exercises.add_item(str(type) + ": " +
-					str(item_exercise["first"]) 
-					+ " " + 
-					str(item_exercise["operator"]) 
-					+ " " + 
-					str(item_exercise["second"])
-					)
-		
+		randomize()
+		exercise_list.shuffle()
 		save_exercise_list()
 		exercise_list = []
 		clicked.emit(self)
@@ -44,14 +38,6 @@ func save_exercise_list():
 	var file = FileAccess.open(save_file_path, FileAccess.WRITE)
 	file.store_var(exercise_list)
 	file.store_var(h_slider_interval.value)
+	file.store_var(h_slider_game.value)
 	print("saving list to disk...")
 	file.close()
-
-func load_exercise_list():
-	if FileAccess.file_exists(save_file_path):
-		var file = FileAccess.open(save_file_path, FileAccess.READ)
-		var list = file.get_var()
-		print(list)
-		file.close()
-	else:
-		pass

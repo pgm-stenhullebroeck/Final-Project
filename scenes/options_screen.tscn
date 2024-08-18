@@ -1,24 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://ct0nja1st1e30"]
+[gd_scene load_steps=9 format=3 uid="uid://ct0nja1st1e30"]
 
 [ext_resource type="Theme" uid="uid://b2yw3qprwvxry" path="res://assets/theme/base_theme.tres" id="1_k5tr2"]
 [ext_resource type="Script" path="res://scripts/options_screen.gd" id="2_c2oa8"]
-[ext_resource type="Texture2D" uid="uid://cvrqlg8cplxxn" path="res://assets/textures/bg/Border All 4.png" id="3_7cmqi"]
 [ext_resource type="Script" path="res://scripts/type_select.gd" id="4_sabhx"]
 [ext_resource type="Script" path="res://scripts/amount_value.gd" id="5_qtfqs"]
+[ext_resource type="Script" path="res://scripts/game_value.gd" id="6_66mor"]
 [ext_resource type="Script" path="res://scripts/interval_value.gd" id="6_pybdy"]
 [ext_resource type="Script" path="res://scripts/options_play_button.gd" id="7_0hkdj"]
 [ext_resource type="PackedScene" uid="uid://bv557pno68fqy" path="res://scenes/screen_button.tscn" id="7_f5ueo"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egto6"]
-bg_color = Color(0.484762, 0.632256, 0.64301, 1)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0.627428, 0.840306, 0.908136, 1)
-
-[sub_resource type="Theme" id="Theme_ed14x"]
-Panel/styles/panel = SubResource("StyleBoxFlat_egto6")
 
 [node name="OptionsScreen" type="Control"]
 layout_mode = 3
@@ -37,7 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.12549, 0.117647, 0.14902, 1)
 
 [node name="TypeSelect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -46,7 +35,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_7cmqi")
 region_rect = Rect2(192, 192, 64, 64)
 patch_margin_left = 8
 patch_margin_top = 8
@@ -61,129 +49,168 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 50.0
-offset_top = -200.0
-offset_right = 388.0
-offset_bottom = -2.0
+offset_left = -393.0
+offset_top = -211.0
+offset_right = -55.0
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
+scroll_deadzone = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TypeSelect/ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 2
 
-[node name="Panel" type="Panel" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_ed14x")
-
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 0
-offset_left = 90.0
-offset_top = 117.0
-offset_right = 304.0
-offset_bottom = 257.0
-
-[node name="ItemList" type="ItemList" parent="."]
+[node name="ItemList" type="ItemList" parent="TypeSelect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -380.0
-offset_top = -200.0
-offset_right = -167.0
-offset_bottom = -2.0
+offset_left = -392.0
+offset_top = 17.0
+offset_right = -56.0
+offset_bottom = 215.0
 grow_horizontal = 2
 grow_vertical = 2
 allow_search = false
 
-[node name="Exercises" type="ItemList" parent="."]
+[node name="Sliders" type="Control" parent="TypeSelect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -199.0
+offset_right = 422.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSliderAmount" type="HSlider" parent="TypeSelect/Sliders"]
 layout_mode = 0
-offset_left = 539.0
-offset_top = 334.0
-offset_right = 832.0
-offset_bottom = 492.0
-
-[node name="Sliders" type="Node2D" parent="."]
-position = Vector2(103, 287)
-
-[node name="LabelAmount" type="Label" parent="Sliders"]
-offset_left = 1.0
-offset_top = 35.0
-offset_right = 166.0
-offset_bottom = 58.0
-text = "Oefeningen per type"
-
-[node name="HSliderAmount" type="HSlider" parent="Sliders"]
-offset_left = -11.0
-offset_top = 61.0
-offset_right = 181.0
-offset_bottom = 88.0
+offset_left = 40.0
+offset_top = 14.0
+offset_right = 382.0
+offset_bottom = 67.0
 min_value = 1.0
 max_value = 10.0
 value = 5.0
 
-[node name="AmountValue" type="Label" parent="Sliders"]
-offset_left = -6.0
-offset_top = 92.0
-offset_right = 34.0
-offset_bottom = 115.0
+[node name="LabelAmount" type="Label" parent="TypeSelect/Sliders/HSliderAmount"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = -27.0
+offset_right = 279.0
+offset_bottom = -4.0
+text = "Oefeningen per type"
+
+[node name="AmountValue" type="Label" parent="TypeSelect/Sliders/HSliderAmount"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 40.0
+offset_right = 45.0
+offset_bottom = 63.0
 script = ExtResource("5_qtfqs")
 
-[node name="LabelInterval" type="Label" parent="Sliders"]
-offset_top = 120.0
-offset_right = 156.0
-offset_bottom = 143.0
-text = "Oefeningen per spel"
-
-[node name="HSliderInterval" type="HSlider" parent="Sliders"]
-offset_left = -11.0
-offset_top = 155.0
-offset_right = 181.0
-offset_bottom = 182.0
+[node name="HSliderInterval" type="HSlider" parent="TypeSelect/Sliders"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 110.0
+offset_right = 385.0
+offset_bottom = 164.0
 min_value = 1.0
 max_value = 20.0
 value = 5.0
 
-[node name="IntervalValue" type="Label" parent="Sliders"]
-offset_top = 184.0
-offset_right = 40.0
-offset_bottom = 207.0
+[node name="LabelInterval" type="Label" parent="TypeSelect/Sliders/HSliderInterval"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = -27.0
+offset_right = 279.0
+offset_bottom = -4.0
+text = "Oefeningen per spel"
+
+[node name="IntervalValue" type="Label" parent="TypeSelect/Sliders/HSliderInterval"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 40.0
+offset_right = 45.0
+offset_bottom = 63.0
 script = ExtResource("6_pybdy")
 
-[node name="Button" type="Button" parent="."]
+[node name="HSliderGame" type="HSlider" parent="TypeSelect/Sliders"]
 layout_mode = 0
-offset_left = 376.0
-offset_top = 437.0
-offset_right = 505.0
-offset_bottom = 483.0
+offset_left = 40.0
+offset_top = 206.0
+offset_right = 385.0
+offset_bottom = 260.0
+max_value = 2.0
+
+[node name="LabelGame" type="Label" parent="TypeSelect/Sliders/HSliderGame"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = -27.0
+offset_right = 209.0
+offset_bottom = -5.0
+text = "Spel keuze"
+
+[node name="GameValue" type="Label" parent="TypeSelect/Sliders/HSliderGame"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 40.0
+offset_right = 89.0
+offset_bottom = 62.0
+text = "de bom"
+script = ExtResource("6_66mor")
+
+[node name="Button" type="Button" parent="TypeSelect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 104.0
+offset_top = 101.0
+offset_right = 326.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
 text = "start"
 
-[node name="OptionsPlay" parent="." instance=ExtResource("7_f5ueo")]
-layout_mode = 0
-offset_left = 376.0
-offset_top = 437.0
-offset_right = 505.0
-offset_bottom = 483.0
+[node name="OptionsPlay" parent="TypeSelect" instance=ExtResource("7_f5ueo")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 104.0
+offset_top = 101.0
+offset_right = 326.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("7_0hkdj")
 
-[node name="Label" type="Label" parent="OptionsPlay"]
-layout_mode = 0
-offset_left = 29.0
-offset_top = 13.0
-offset_right = 99.0
-offset_bottom = 35.0
+[node name="Label" type="Label" parent="TypeSelect/OptionsPlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "start
 "
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="value_changed" from="Sliders/HSliderAmount" to="Sliders/AmountValue" method="_on_h_slider_amount_value_changed"]
-[connection signal="value_changed" from="Sliders/HSliderInterval" to="Sliders/IntervalValue" method="_on_h_slider_interval_value_changed"]
+[connection signal="value_changed" from="TypeSelect/Sliders/HSliderAmount" to="TypeSelect/Sliders/HSliderAmount/AmountValue" method="_on_h_slider_amount_value_changed"]
+[connection signal="value_changed" from="TypeSelect/Sliders/HSliderInterval" to="TypeSelect/Sliders/HSliderInterval/IntervalValue" method="_on_h_slider_interval_value_changed"]
+[connection signal="value_changed" from="TypeSelect/Sliders/HSliderGame" to="TypeSelect/Sliders/HSliderGame/GameValue" method="_on_h_slider_game_value_changed"]

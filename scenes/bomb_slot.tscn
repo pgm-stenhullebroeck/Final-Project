@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://dajkuhfxoh1x0"]
+
+[ext_resource type="Script" path="res://scripts/bomb_slot.gd" id="1_6v8av"]
+[ext_resource type="Texture2D" uid="uid://cfhuoiff0iqd2" path="res://assets/textures/ui/buttonSquare_blue_pressed.png" id="1_35gnn"]
+[ext_resource type="Texture2D" uid="uid://dly7uy4rtofjq" path="res://assets/textures/ui/iconCircle_grey.png" id="3_ecq7b"]
+[ext_resource type="Texture2D" uid="uid://dh2wd5iboroda" path="res://assets/textures/ui/iconCheck_grey.png" id="3_ptdnb"]
+[ext_resource type="LabelSettings" uid="uid://bj6ruriak1ymu" path="res://assets/theme/med_large_label_white.tres" id="5_0l1ke"]
+
+[node name="BombSlot" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_35gnn")
+stretch_mode = 0
+script = ExtResource("1_6v8av")
+
+[node name="BombTexture" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.2484, 0.2484, 0.2484, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -32.5
+offset_right = 31.5
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ptdnb")
+
+[node name="TextureRect" type="TextureRect" parent="BombTexture"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = 9.0
+offset_right = -7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ecq7b")
+
+[node name="UnknownTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UnknownTexture"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "?"
+label_settings = ExtResource("5_0l1ke")
+horizontal_alignment = 1
+vertical_alignment = 1

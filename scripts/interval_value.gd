@@ -1,6 +1,6 @@
 extends Label
 
-@onready var h_slider_interval = $"../HSliderInterval"
+@onready var h_slider_interval = $".."
 
 func _ready():
 	text = str(h_slider_interval.value)

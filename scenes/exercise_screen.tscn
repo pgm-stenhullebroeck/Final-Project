@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://yt1hxpqdgmva"]
+[gd_scene load_steps=29 format=3 uid="uid://yt1hxpqdgmva"]
 
 [ext_resource type="Texture2D" uid="uid://5jouq5o4dtgf" path="res://assets/textures/bg/panel_beigeLight.png" id="2_xyu52"]
 [ext_resource type="LabelSettings" uid="uid://cg1k487gxrf13" path="res://assets/theme/large_label.tres" id="3_ehal2"]
@@ -9,11 +9,17 @@
 [ext_resource type="LabelSettings" uid="uid://ckxf44o6phpte" path="res://assets/theme/medium_label.tres" id="6_2p7c7"]
 [ext_resource type="Script" path="res://scripts/animation_player.gd" id="6_8xwlg"]
 [ext_resource type="PackedScene" uid="uid://bv557pno68fqy" path="res://scenes/screen_button.tscn" id="7_pqyxl"]
+[ext_resource type="Script" path="res://scripts/status_modal.gd" id="9_momad"]
 [ext_resource type="Texture2D" uid="uid://cwt0iolsq8l1n" path="res://assets/textures/bg/panel_blue.png" id="9_wsopw"]
 [ext_resource type="LabelSettings" uid="uid://gkcvy4br5ybg" path="res://assets/theme/med_large_label.tres" id="10_5nby0"]
+[ext_resource type="Texture2D" uid="uid://dq3byhmjbctuj" path="res://assets/textures/ui/buttonSquare_blue.png" id="10_diwl6"]
 [ext_resource type="Texture2D" uid="uid://v7v5fmpavecr" path="res://assets/textures/ui/buttonLong_blue.png" id="11_3t5y7"]
+[ext_resource type="Texture2D" uid="uid://cfhuoiff0iqd2" path="res://assets/textures/ui/buttonSquare_blue_pressed.png" id="11_17a72"]
 [ext_resource type="Texture2D" uid="uid://cis82x1j6uhev" path="res://assets/textures/ui/buttonLong_blue_pressed.png" id="11_fnkxd"]
+[ext_resource type="Texture2D" uid="uid://cgy2emewouiar" path="res://assets/textures/ui/iconCross_grey.png" id="12_eknbs"]
 [ext_resource type="Script" path="res://scripts/back_button_animation.gd" id="13_cu01r"]
+[ext_resource type="Texture2D" uid="uid://nyy7p55wgoas" path="res://assets/textures/bg/panel_brown.png" id="15_f0va8"]
+[ext_resource type="LabelSettings" uid="uid://bj6ruriak1ymu" path="res://assets/theme/med_large_label_white.tres" id="17_5lx2p"]
 
 [sub_resource type="Theme" id="Theme_5ykxn"]
 default_font_size = 64
@@ -69,14 +75,14 @@ step = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BackToOptions:position:y")
+tracks/0/path = NodePath("BoxContainer/BackToOptions:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.001),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [89.0, 87.0]
+"values": [2.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_76xsx"]
@@ -86,14 +92,14 @@ step = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BackToOptions:position:y")
+tracks/0/path = NodePath("BoxContainer/BackToOptions:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.001),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [87.0, 89.0]
+"values": [0.0, 2.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3mvj3"]
@@ -548,6 +554,66 @@ label_settings = ExtResource("6_2p7c7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="StatusModal" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_momad")
+
+[node name="ColorRect" type="ColorRect" parent="StatusModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.168627)
+
+[node name="TextureRect" type="TextureRect" parent="StatusModal/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_f0va8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatusModal/ColorRect/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -95.5
+offset_right = 71.0
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="StatusModal/ColorRect/TextureRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="StatusModal/ColorRect/TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Goed zo"
+label_settings = ExtResource("17_5lx2p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ResultModal" type="ColorRect" parent="."]
 visible = false
 layout_mode = 1
@@ -592,6 +658,7 @@ offset_right = 183.0
 offset_bottom = 170.5
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Label" type="Label" parent="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer"]
 layout_mode = 2
@@ -605,15 +672,20 @@ text = "Result label"
 label_settings = ExtResource("6_2p7c7")
 horizontal_alignment = 1
 
-[node name="BackToOptions" parent="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer" instance=ExtResource("7_pqyxl")]
+[node name="BoxContainer" type="BoxContainer" parent="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BackToOptions" parent="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/BoxContainer" instance=ExtResource("7_pqyxl")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 texture_normal = ExtResource("11_3t5y7")
 texture_pressed = ExtResource("11_fnkxd")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/BackToOptions"]
+[node name="Label" type="Label" parent="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/BoxContainer/BackToOptions"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -637,6 +709,30 @@ libraries = {
 }
 script = ExtResource("13_cu01r")
 
+[node name="Return" parent="." instance=ExtResource("7_pqyxl")]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 23.0
+offset_right = 80.0
+offset_bottom = 72.0
+texture_normal = ExtResource("10_diwl6")
+texture_pressed = ExtResource("11_17a72")
+
+[node name="TextureRect" type="TextureRect" parent="Return"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -13.5
+offset_right = 12.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_eknbs")
+
 [connection signal="text_submitted" from="NinePatchRect/MarginContainer/ExerciseContainer/HBoxContainer/InputBox/AnswerInput" to="." method="_on_answer_input_text_submitted"]
 [connection signal="button_down" from="NinePatchRect/MarginContainer/ExerciseContainer/CheckBtnBox/CheckBtn" to="NinePatchRect/MarginContainer/ExerciseContainer/CheckBtnBox/AnimationPlayer" method="_on_check_btn_button_down"]
 [connection signal="button_up" from="NinePatchRect/MarginContainer/ExerciseContainer/CheckBtnBox/CheckBtn" to="NinePatchRect/MarginContainer/ExerciseContainer/CheckBtnBox/AnimationPlayer" method="_on_check_btn_button_up"]
@@ -652,5 +748,5 @@ script = ExtResource("13_cu01r")
 [connection signal="pressed" from="NinePatchRect/NumpadContainer/NumpadButton9" to="NinePatchRect/NumpadContainer" method="_on_numpad_button_9_pressed"]
 [connection signal="pressed" from="NinePatchRect/NumpadContainer/NumpadButton10" to="NinePatchRect/NumpadContainer" method="_on_numpad_button_10_pressed"]
 [connection signal="pressed" from="NinePatchRect/NumpadContainer/NumpadButton11" to="NinePatchRect/NumpadContainer" method="_on_numpad_button_11_pressed"]
-[connection signal="button_down" from="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/BackToOptions" to="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/AnimationPlayer" method="_on_back_to_options_button_down"]
-[connection signal="button_up" from="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/BackToOptions" to="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/AnimationPlayer" method="_on_back_to_options_button_up"]
+[connection signal="button_down" from="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/BoxContainer/BackToOptions" to="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/AnimationPlayer" method="_on_back_to_options_button_down"]
+[connection signal="button_up" from="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/BoxContainer/BackToOptions" to="ResultModal/MarginContainer/NinePatchRect2/ResultsContainer/AnimationPlayer" method="_on_back_to_options_button_up"]

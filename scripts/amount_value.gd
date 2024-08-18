@@ -1,6 +1,6 @@
 extends Label
 
-@onready var h_slider_amount = $"../HSliderAmount"
+@onready var h_slider_amount = $".."
 
 func _ready():
 	text = str(h_slider_amount.value)
