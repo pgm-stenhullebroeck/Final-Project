@@ -13,8 +13,7 @@ extends BaseScreen
 const TIC_TAC_TOE = preload("res://scenes/tic_tac_toe.tscn")
 const THE_BOMB = preload("res://scenes/the_bomb.tscn")
 
-const Succes = preload("res://assets/textures/character/o.png")
-const Fail = preload("res://assets/textures/character/x.png")
+const Succes = preload("res://assets/textures/character/smile-sprite.png")
 
 const save_file_path: String = "user://exercise_list.save"
 var exercise_list: Array = []

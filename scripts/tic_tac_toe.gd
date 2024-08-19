@@ -62,13 +62,11 @@ func game_check():
 
 func game_over(result):
 	if result[0] == str(X):
-		result_label.text = "speler 1 wint"
+		result_label.text = "Speler 1 heeft gewonnen!"
 	elif result[0] == str(O):
-		result_label.text = "speler 2 wint"
+		result_label.text = "Speler 2 heeft gewonnen!"
 	else:
-		result_label.text = "gelijk"
-
-
+		result_label.text = "Gelijkspel"
 	result_modal.visible = true
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bnd8co0vtghfx"]
+[gd_scene load_steps=13 format=3 uid="uid://bnd8co0vtghfx"]
 
 [ext_resource type="Script" path="res://scripts/base_screen.gd" id="1_6gjmi"]
 [ext_resource type="Theme" uid="uid://b2yw3qprwvxry" path="res://assets/theme/base_theme.tres" id="1_grdih"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://daclt3rbhs7l4" path="res://assets/textures/ui/buttonLong_beige_pressed.png" id="5_0yo0e"]
 [ext_resource type="Script" path="res://scripts/title_animation.gd" id="6_f2wdc"]
 [ext_resource type="LabelSettings" uid="uid://cg1k487gxrf13" path="res://assets/theme/large_label.tres" id="6_rsrkh"]
-[ext_resource type="Texture2D" uid="uid://nyy7p55wgoas" path="res://assets/textures/bg/panel_brown.png" id="9_rlw3r"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4bhnj"]
 font_size = 52
@@ -221,13 +220,5 @@ libraries = {
 "": SubResource("AnimationLibrary_0kkt8")
 }
 script = ExtResource("6_f2wdc")
-
-[node name="PanelBrown" type="Sprite2D" parent="Control"]
-position = Vector2(315, 596)
-texture = ExtResource("9_rlw3r")
-
-[node name="PanelBeigeLight" type="Sprite2D" parent="."]
-position = Vector2(594, 602)
-texture = ExtResource("3_mn4yt")
 
 [connection signal="pressed" from="Control/TitlePlay" to="Control/TitlePlay/AnimationPlayer" method="_on_title_play_pressed"]

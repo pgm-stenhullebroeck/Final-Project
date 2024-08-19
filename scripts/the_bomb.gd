@@ -39,16 +39,16 @@ func _on_slot_clicked(slot):
 				bombs_found += 1
 			slot.unknown_texture.visible = false
 		player = !player
-	if bombs_found == bomb_amount:
+	if bombs_found == bomb_amount or player_1_points == 3 or player_2_points == 3:
 		game_over()
 
 func game_over():
-	if player_1_points == player_2_points:
-		result_label.text = "Gelijk"
 	if player_1_points > player_2_points:
-		result_label.text = "speler 2 wint"
-	if player_1_points < player_2_points:
-		result_label.text = "speler 1 wint"
+		result_label.text = "Speler 2 heeft gewonnen!"
+	elif player_1_points < player_2_points:
+		result_label.text = "Speler 1 heeft gewonnen!"
+	else:
+		result_label.text = "Gelijkspel"
 	result_modal.visible = true
 
 func _on_reset_button_pressed():
